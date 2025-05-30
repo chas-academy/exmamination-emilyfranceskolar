@@ -59,7 +59,7 @@ function showOutput(someList, newEntry){
 
     //create list element & output for all lists, before I had a lot of redundant code 
     const li = document.createElement("li");                                 
-    li.textContent = `${newEntry.description} - ${newEntry.amount}kr (${newEntry.type === "income" ? "Inkomst" : "Utgift"})`; // show inkomst or utgift depending on the objects's type
+    li.textContent = `${newEntry.description} - ${newEntry.amount} kr (${newEntry.type === "income" ? "Inkomst" : "Utgift"})`; // show inkomst or utgift depending on the objects's type
     someList.appendChild(li);
 
     const text = document.createElement("p");
