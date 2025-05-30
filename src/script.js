@@ -6,7 +6,7 @@ const expenseBtn = document.getElementById("expenseBtn");
 const incomeList = document.getElementById("incomeList");
 const expenseList = document.getElementById("expenseList");
 const transactionList = document.getElementById("transactionList");
-const balanceTotal = document.getElementById("balance");
+const balance = document.getElementById("balance");
 
 //arrays for income, expenses and transactions
 let income = [];
@@ -55,7 +55,7 @@ function clearInput(){
 function showOutput(someList, newEntry){
 
     //clear so not all entries show, just the final end total
-    balanceTotal.innerHTML = "";
+    balance.innerHTML = "";
 
     //create list element & output for all lists, before I had a lot of redundant code 
     const li = document.createElement("li");                                 
@@ -64,7 +64,7 @@ function showOutput(someList, newEntry){
 
     const text = document.createElement("p");
     text.textContent = total;
-    balanceTotal.appendChild(text);
+    balance.appendChild(text);
 }
 
 incomeBtn.addEventListener("click", () => {
