@@ -11,7 +11,6 @@ const balance = document.getElementById("balance");
 //arrays for income, expenses and transactions
 let income = [];
 let expense = [];
-let transaction = [];
 
 //to keep track of total balance
 let total = 0;
@@ -24,50 +23,52 @@ function addEntry(type){
     const amount = Number(amountInput.value);  
 
     //new object to place all new entries
-    const newEntry = {description, amount, type};
+    const newEntry = {
+        description: description, 
+        amount: amount, 
+        type: type};
 
-    // if newEntry's type === "income", then <add> newEntry's amount to the total, add all of newEntry to expense, transaction []s w/ push method
-    // then call the show output function with the lists/arrays for income and transaction and object newEntry as parameters
+    // if newEntry's type === "income", <add> newEntry's amount to the total, add to income, transaction arrays w/ push method
+    // then show the array for income
     if (newEntry.type === "income"){
         total += newEntry.amount;
         income.push(newEntry);
         //console.log(income);
-        transaction.push(newEntry);
-        showOutput(incomeList, newEntry);
-        showOutput(transactionList, newEntry);
+       
+        const li = document.createElement("li");  
+        li.textContent = `${description} - ${amount} kr (Inkomst)`;
+        incomeList.appendChild(li);
+      
     } else {
-    //otherwise subtract object's amount from total, add to expense and transaction []s w/ push method, then call the show output function as above
+    //otherwise <subtract> newEntry's amount from total, add to expense and transaction arrays w/ push method, then show the array for expense
         total -= newEntry.amount;
         expense.push(newEntry);
         //console.log(expense);
-        transaction.push(newEntry);
-        showOutput(expenseList, newEntry);
-        showOutput(transactionList, newEntry);
+
+        const li = document.createElement("li");  
+        li.textContent = `${description} - ${amount} kr (Utgift)`;
+        expenseList.appendChild(li);
     }
-    //call function to clear input
+    //call function to clear input & show balance
      clearInput();
+     showBalance();
 }
 
-//added function to clear input and reduce previous redundancy
+//function to clear input
 function clearInput(){
     descriptionInput.value = "";
     amountInput.value = "";
 }
-//function to show output with alist & object newEntry as parameters
-function showOutput(aList, newEntry){
 
+function showBalance(){
     //clear so not all entries show, just the final end total
     balance.innerHTML = "";
-
-    //create list element & output for all lists, before I had a lot of redundant code 
-    const li = document.createElement("li");                                 
-    li.textContent = `${newEntry.description} - ${newEntry.amount} kr (${newEntry.type === "income" ? "Inkomst" : "Utgift"})`; // show inkomst or utgift depending on the objects's type
-    aList.appendChild(li);
 
     const text = document.createElement("p");
     text.textContent = total;
     balance.appendChild(text);
 }
+
 incomeBtn.addEventListener("click", () => {
     addEntry("income");
 })
