@@ -3,7 +3,6 @@ const descriptionInput = document.getElementById("desc");
 const amountInput = document.getElementById("amount");
 const incomeBtn = document.getElementById("incomeBtn");
 const expenseBtn = document.getElementById("expenseBtn");
-
 const incomeList = document.getElementById("incomeList");
 const expenseList = document.getElementById("expenseList");
 const transactionList = document.getElementById("transactionList");
@@ -32,6 +31,7 @@ function addEntry(type){
     if (newEntry.type === "income"){
         total += newEntry.amount;
         income.push(newEntry);
+        //console.log(income);
         transaction.push(newEntry);
         showOutput(incomeList, newEntry);
         showOutput(transactionList, newEntry);
@@ -39,6 +39,7 @@ function addEntry(type){
     //otherwise subtract object's amount from total, add to expense and transaction []s w/ push method, then call the show output function as above
         total -= newEntry.amount;
         expense.push(newEntry);
+        //console.log(expense);
         transaction.push(newEntry);
         showOutput(expenseList, newEntry);
         showOutput(transactionList, newEntry);
@@ -52,7 +53,7 @@ function clearInput(){
     descriptionInput.value = "";
     amountInput.value = "";
 }
-//function to show output with a list & object as parameters
+//function to show output with alist & object newEntry as parameters
 function showOutput(aList, newEntry){
 
     //clear so not all entries show, just the final end total
@@ -67,7 +68,6 @@ function showOutput(aList, newEntry){
     text.textContent = total;
     balance.appendChild(text);
 }
-
 incomeBtn.addEventListener("click", () => {
     addEntry("income");
 })
